@@ -1,0 +1,55 @@
+.user-form {
+  visibility: hidden;
+}
+
+table {
+  display: table;
+  box-sizing: border-box;
+  text-indent: 0;
+  text-align: left;
+  border-collapse: collapse;
+}
+
+tr,
+th {
+  border: 2px solid;
+}
+
+thead {
+  border-block-end: 2px solid;
+  background: whitesmoke;
+}
+#userTable {
+  width: 100%;
+}
+
+#myForm {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f9f9f9;
+  padding: 30px;
+  border: 1px solid #888;
+  z-index: 2;
+}
+#myForm > input {
+  margin-bottom: 20px;
+}
+#myForm .buttons {
+  display: flex;
+  justify-content: space-between;
+}
+#myForm .buttons button {
+  flex: 1;
+  margin: 1px;
+}
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}

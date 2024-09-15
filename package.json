@@ -1,0 +1,38 @@
+{
+  "name": "noseloc",
+  "version": "1.0.0",
+  "description": "small demo",
+  "type":"module",
+  "main": "./dist/main.js",
+  "scripts": {
+    "test": "jest",
+    "start": "tsc --watch",
+    "build": "webpack --progress --display-error-details"
+  },
+  "keywords": [
+    "ui",
+    "demo",
+    "ts",
+    "playright"
+  ],
+  "author": "nomook",
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/js": "^9.10.0",
+    "@types/node": "^22.5.5",
+    "eslint": "^9.10.0",
+    "globals": "^15.9.0",
+    "ts-loader": "^9.5.1",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.2",
+    "typescript-eslint": "^8.5.0"
+  },
+  "dependencies": {
+    "commonjs": "^0.0.1",
+    "dotenv": "^16.4.5",
+    "mongodb": "^6.9.0",
+    "requirejs": "^2.3.7",
+    "webpack": "^5.94.0",
+    "webpack-cli": "^5.1.4"
+  }
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestion des Utilisateurs</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Gestion des Utilisateurs</h1>
+
+      <button id="addUserButton">Add user</button>
+      <div id="overlay" style="display: none"></div>
+      <form id="myForm" style="display: none">
+        <label for="lastName">Nom :</label>
+        <input type="text" id="lastName" required />
+        
+        <label for="firstName">Prénom :</label>
+        <input type="text" id="firstName" required />
+
+
+        <label for="dateOfBirth">Date de naissance :</label>
+        <input type="date" id="dateOfBirth" required />
+
+        <label for="photoUrl">Photo (URL) :</label>
+        <input
+          type="file"
+          id="photoUrl"
+          placeholder="URL de la photo"
+          required
+        />
+        <div class="buttons">
+          <button type="submit">Add</button>
+          <button type="button">Cancel</button>
+        </div>
+      </form>
+
+      <div id="tableComponent">
+        <table id="userTable">
+          <caption>
+            Liste des utilisateurs :
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Name</th>
+              <th scope="col">First name</th>
+              <th scope="col">Birth date</th>
+              <th scope="col">Creation date</th>
+              <th scope="col">Edit</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        
+      </div>
+    </div>
+
+    <script type="module" src="./../dist/main.js"></script>
+  </body>
+</html>
