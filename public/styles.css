@@ -23,7 +23,7 @@ thead {
   width: 100%;
 }
 
-#myForm {
+.popup {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -33,14 +33,14 @@ thead {
   border: 1px solid #888;
   z-index: 2;
 }
-#myForm > input {
+.popup > input {
   margin-bottom: 20px;
 }
-#myForm .buttons {
+.popup .buttons {
   display: flex;
   justify-content: space-between;
 }
-#myForm .buttons button {
+.popup .buttons button {
   flex: 1;
   margin: 1px;
 }

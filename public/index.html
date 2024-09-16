@@ -12,29 +12,6 @@
 
       <button id="addUserButton">Add user</button>
       <div id="overlay" style="display: none"></div>
-      <form id="myForm" style="display: none">
-        <label for="lastName">Nom :</label>
-        <input type="text" id="lastName" required />
-        
-        <label for="firstName">Prénom :</label>
-        <input type="text" id="firstName" required />
-
-
-        <label for="dateOfBirth">Date de naissance :</label>
-        <input type="date" id="dateOfBirth" required />
-
-        <label for="photoUrl">Photo (URL) :</label>
-        <input
-          type="file"
-          id="photoUrl"
-          placeholder="URL de la photo"
-          required
-        />
-        <div class="buttons">
-          <button type="submit">Add</button>
-          <button type="button">Cancel</button>
-        </div>
-      </form>
 
       <div id="tableComponent">
         <table id="userTable">
@@ -48,7 +25,7 @@
               <th scope="col">First name</th>
               <th scope="col">Birth date</th>
               <th scope="col">Creation date</th>
-              <th scope="col">Edit</th>
+              <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody></tbody>
