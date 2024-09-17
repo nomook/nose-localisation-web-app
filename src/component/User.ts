@@ -1,8 +1,8 @@
 import { deleteUser, drawTable } from "../events/events.js";
 import { IUser } from "../interfaces/IUser.js";
-import { UserCreationPopUp } from "./popup/UserCreationPopUp.js";
 import { ConfirmationPopUp } from "./popup/ConfirmationPopUp.js";
 import { UserList } from "./UserList.js";
+import { UserUpdatePopUp } from "./popup/UserUpdatePopUp.js";
 
 export class User implements IUser {
   uid: string;
@@ -11,7 +11,7 @@ export class User implements IUser {
   pictureURL: string;
   birthDate: Date;
   nosePosition?: { x: number; y: number };
-  creationDate: Date;
+  lastUpdateDate: Date;
 
   constructor(
     name: string,
@@ -25,7 +25,7 @@ export class User implements IUser {
     this.pictureURL = pictureURL;
     this.birthDate = birthDate;
 
-    this.creationDate = new Date(Date.now());
+    this.lastUpdateDate = new Date(Date.now());
   }
 
   toRow(index: number = 0, users: UserList): HTMLTableRowElement {
@@ -41,7 +41,7 @@ export class User implements IUser {
     rowEl.appendChild(createElement("td", this.name.toString()));
     rowEl.appendChild(createElement("td", this.firstName.toString()));
     rowEl.appendChild(createElement("td", this.birthDate.toDateString()));
-    rowEl.appendChild(createElement("td", this.creationDate.toISOString()));
+    rowEl.appendChild(createElement("td", this.lastUpdateDate.toISOString()));
 
     rowEl.appendChild(this.getActionsSpan(index, users));
 
@@ -60,7 +60,7 @@ export class User implements IUser {
       edit: {
         innerText: "✍️",
         eventFn: () => {
-          new UserCreationPopUp(users, document.getElementById("overlay") as HTMLDivElement);
+          new UserUpdatePopUp(this, users, document.getElementById("overlay") as HTMLDivElement);
         }
       },
       delete: {

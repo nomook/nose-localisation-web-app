@@ -9,6 +9,6 @@ export interface IUser {
     firstName: string,
     pictureURL: string,
     nosePosition?: IPosition,
-    creationDate: Date,
+    lastUpdateDate: Date,
     birthDate: Date,
 }
