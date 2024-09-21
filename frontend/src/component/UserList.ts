@@ -1,6 +1,6 @@
-import { IUserList } from "src/interfaces/IUserList";
+import { IUserList } from "../interface/IUserList.js";
 import { User } from "./User";
-import { PAGE_MAX_LENGTH } from "../services/utils.js";
+import { PAGE_MAX_LENGTH } from "../service/utils.js";
 
 export class UserList implements IUserList {
   list: { id: number; data: User }[];
@@ -18,7 +18,7 @@ export class UserList implements IUserList {
 
   public remove(id: number): { id: number; data: User }[] | undefined {
     for (let index = 0; index < this.list.length; index++) {
-      if (this.list.at(index).id == id) {
+      if (this.list[index]?.id == id) {
         return this.list.splice(index, 1);
       }
     }
@@ -27,8 +27,8 @@ export class UserList implements IUserList {
 
   get(id: number): { id: number; data: User } | undefined {
     for (let index = 0; index < this.list.length; index++) {
-      if (this.list.at(index).id == id) {
-        return this.list.at(index);
+      if (this.list[index]?.id == id) {
+        return this.list[index];
       }
     }
     return undefined;

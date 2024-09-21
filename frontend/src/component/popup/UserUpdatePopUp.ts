@@ -1,4 +1,4 @@
-import { inputElement } from "../../services/utils.js";
+import { inputElement } from "../../service/utils.js";
 import { drawTable, hideForm } from "../../events/events.js";
 import { User } from "../User.js";
 import { UserList } from "../UserList.js";
@@ -31,10 +31,11 @@ export class UserUpdatePopUp {
   }
 
   private createForm(users: UserList): void {
-    this.formElement.append(...inputElement('lastName', 'Nom :', true, 'text'));
-    this.formElement.append(...inputElement('firstName', 'Prénom :', true, 'text'));
-    this.formElement.append(...inputElement('dateOfBirth', 'Date de naissance :', false, 'date'));
-    this.formElement.append(...inputElement('photoUrl', 'URL de la photo', false, 'file'));
+    this.formElement.append(...inputElement('lastName', 'Nom :', true, 'text', this.user.name));
+    this.formElement.append(...inputElement('firstName', 'Prénom :', true, 'text', this.user.firstName));
+    const zeroPad = (num, places) => String(num).padStart(places, '0')
+    this.formElement.append(...inputElement('dateOfBirth', 'Date de naissance :', false, 'date', `${this.user.birthDate.getFullYear()}-${zeroPad(this.user.birthDate.getMonth()+1, 2)}-${zeroPad(this.user.birthDate.getDate(),2)}`));
+    this.formElement.append(...inputElement('photoUrl', 'URL de la photo', false, 'file', this.user.pictureURL));
     this.formElement.appendChild(this.getButtons(users));
   }
 
@@ -52,7 +53,7 @@ export class UserUpdatePopUp {
 
     this.formElement.addEventListener("submit", (event) => {
       event.preventDefault();
-      this.updateUser(event, users);
+      this.updateUser(event);
       drawTable(users);
     });
     cancelBtn.addEventListener("click", () => hideForm(this.overlay));
@@ -60,15 +61,16 @@ export class UserUpdatePopUp {
     return btnDiv;
   }
 
-  private updateUser(event: SubmitEvent, users: UserList) {
+  private updateUser(event: SubmitEvent) {
     const inputElements: object = Array.from(
       this.formElement.querySelectorAll("input")
     ).reduce((obj: object, el: HTMLInputElement) => {
       obj[el.id] = el.value;
       return obj;
     }, {});
+    console.log(inputElements);
+    console.log(this.user);
 
-    // users.get(1).data.update(us);
     hideForm(this.overlay);
   }
 }

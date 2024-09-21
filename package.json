@@ -1,22 +1,29 @@
 {
-  "name": "noseloc",
+  "name": "ge_proj",
   "version": "1.0.0",
-  "description": "small demo",
-  "type":"module",
-  "main": "./dist/main.js",
+  "main": "./frontend/dist/main.js",
   "scripts": {
-    "test": "jest",
-    "start": "tsc --watch",
-    "build": "webpack --progress --display-error-details"
+    "test-backend": "jest ./backend",
+    "start-backend": "tsc --project ./backend/tsconfig.json -w  | node --watch ./backend/dist/app.js",
+    "test": "jest ./frontend",
+    "start": "tsc --project ./frontend/tsconfig.json -w | npx live-server --open=./frontend/public --port=8080",
+    "start-app": "npm run start-backend | npm run start"
   },
+  "author": "nomook",
   "keywords": [
     "ui",
     "demo",
     "ts",
     "playright"
   ],
-  "author": "nomook",
   "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "mongodb": "^6.9.0",
+    "requirejs": "^2.3.7"
+  },
   "devDependencies": {
     "@eslint/js": "^9.10.0",
     "@types/node": "^22.5.5",
@@ -26,13 +33,5 @@
     "tsx": "^4.19.1",
     "typescript": "^5.6.2",
     "typescript-eslint": "^8.5.0"
-  },
-  "dependencies": {
-    "commonjs": "^0.0.1",
-    "dotenv": "^16.4.5",
-    "mongodb": "^6.9.0",
-    "requirejs": "^2.3.7",
-    "webpack": "^5.94.0",
-    "webpack-cli": "^5.1.4"
   }
 }

@@ -1,5 +1,5 @@
 import { deleteUser, drawTable } from "../events/events.js";
-import { IUser } from "../interfaces/IUser.js";
+import { IUser } from "../interface/IUser.js";
 import { ConfirmationPopUp } from "./popup/ConfirmationPopUp.js";
 import { UserList } from "./UserList.js";
 import { UserUpdatePopUp } from "./popup/UserUpdatePopUp.js";
@@ -60,8 +60,12 @@ export class User implements IUser {
       edit: {
         innerText: "✍️",
         eventFn: () => {
-          new UserUpdatePopUp(this, users, document.getElementById("overlay") as HTMLDivElement);
-        }
+          new UserUpdatePopUp(
+            this,
+            users,
+            document.getElementById("overlay") as HTMLDivElement
+          );
+        },
       },
       delete: {
         innerText: "❌",
@@ -87,6 +91,25 @@ export class User implements IUser {
       tableCellElement.appendChild(spanElement);
     }
     return tableCellElement;
+  }
+
+  public set setName(v: string) {
+    this.name = v;
+  }
+  public set setFistName(v: string) {
+    this.firstName = v;
+  }
+
+  public set setBirthDate(v: Date) {
+    this.birthDate = v;
+  }
+
+  public set setPhoto(v: string) {
+    this.pictureURL = v;
+  }
+
+  public set setNosePosition(v: { x: number; y: number }) {
+    this.nosePosition = v;
   }
 }
 

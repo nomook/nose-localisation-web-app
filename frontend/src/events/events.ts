@@ -14,11 +14,11 @@ export const hideForm = function (overlay: HTMLDivElement) {
 }
 
 export function deleteUser(cellElement: HTMLTableCellElement, users: UserList) {
-  users.remove(Number(cellElement.parentNode.childNodes.item(0).textContent));
+  users.remove(Number(cellElement?.parentNode?.childNodes.item(0).textContent));
 }
 
 export function drawTable(users: UserList) {
   const usersListElement = document.getElementById("userTable") as HTMLTableElement;
   usersListElement.querySelector("tbody").innerHTML = "";
-  usersListElement.querySelector("tbody").append(...users.toRows(0));
+  usersListElement.querySelector("tbody")?.append(...users.toRows(0));
 }
