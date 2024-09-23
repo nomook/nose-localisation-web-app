@@ -3,3 +3,4 @@ package-lock.json
 dist
 .env
 fetch-api-guide.js
+backend/static/*
