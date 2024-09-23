@@ -4,3 +4,7 @@ dist
 .env
 fetch-api-guide.js
 backend/static/*
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

@@ -7,7 +7,8 @@
     "start-backend": "tsc --project ./backend/tsconfig.json -w  | node --watch ./backend/dist/app.js",
     "test-frontend": "jest ./frontend",
     "start-frontend": "tsc --project ./frontend/tsconfig.json -w | npx live-server --open=./frontend/public --port=8080",
-    "start": "npm run start-backend | npm run start-frontend"
+    "start": "npm run start-backend | npm run start-frontend",
+    "e2e": "npm start | npx playwright test"
   },
   "author": "nomook",
   "keywords": [
@@ -26,6 +27,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.10.0",
+    "@playwright/test": "^1.47.2",
     "@types/node": "^22.5.5",
     "eslint": "^9.10.0",
     "globals": "^15.9.0",
