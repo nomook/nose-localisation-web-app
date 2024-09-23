@@ -1,8 +1,7 @@
-import { inputElement } from "../../service/utils.js";
+import { BACKEND_URL, inputElement } from "../../service/utils.js";
 import { drawTable, hideForm } from "../../events/events.js";
 import { User } from "../User.js";
 import { UserList } from "../UserList.js";
-
 
 export class UserUpdatePopUp {
   private formElement: HTMLFormElement;
@@ -11,7 +10,7 @@ export class UserUpdatePopUp {
 
   constructor(user: User, users: UserList, overlay: HTMLDivElement) {
     this.user = user;
-    this.formElement = document.createElement('form');
+    this.formElement = document.createElement("form");
     this.createForm(users);
     overlay.style.display = "grid";
     this.overlay = overlay;
@@ -21,21 +20,49 @@ export class UserUpdatePopUp {
     document.body.appendChild(this.formElement);
   }
 
-  public get getUser() : User {
+  public get getUser(): User {
     return this.user;
   }
-  
 
   public getElement(): HTMLFormElement {
     return this.formElement;
   }
 
   private createForm(users: UserList): void {
-    this.formElement.append(...inputElement('lastName', 'Nom :', true, 'text', this.user.name));
-    this.formElement.append(...inputElement('firstName', 'Prénom :', true, 'text', this.user.firstName));
-    const zeroPad = (num, places) => String(num).padStart(places, '0')
-    this.formElement.append(...inputElement('dateOfBirth', 'Date de naissance :', false, 'date', `${this.user.birthDate.getFullYear()}-${zeroPad(this.user.birthDate.getMonth()+1, 2)}-${zeroPad(this.user.birthDate.getDate(),2)}`));
-    this.formElement.append(...inputElement('photoUrl', 'URL de la photo', false, 'file', this.user.pictureURL));
+    this.formElement.append(
+      ...inputElement("lastName", "Nom :", true, "text", this.user.name)
+    );
+    this.formElement.append(
+      ...inputElement(
+        "firstName",
+        "Prénom :",
+        true,
+        "text",
+        this.user.firstName
+      )
+    );
+    const zeroPad = (num, places) => String(num).padStart(places, "0");
+    this.formElement.append(
+      ...inputElement(
+        "dateOfBirth",
+        "Date de naissance :",
+        false,
+        "date",
+        `${this.user.birthDate.getFullYear()}-${zeroPad(
+          this.user.birthDate.getMonth() + 1,
+          2
+        )}-${zeroPad(this.user.birthDate.getDate(), 2)}`
+      )
+    );
+    this.formElement.append(
+      ...inputElement(
+        "photoFile",
+        "URL de la photo",
+        false,
+        "file",
+        this.user.pictureURL
+      )
+    );
     this.formElement.appendChild(this.getButtons(users));
   }
 
@@ -51,26 +78,35 @@ export class UserUpdatePopUp {
     cancelBtn.type = "button";
     cancelBtn.innerText = "Cancel";
 
-    this.formElement.addEventListener("submit", (event) => {
+    this.formElement.addEventListener("submit", async (event) => {
       event.preventDefault();
-      this.updateUser(event);
-      drawTable(users);
+      await this.updateUser(event);
+      location.reload();
     });
     cancelBtn.addEventListener("click", () => hideForm(this.overlay));
     btnDiv.append(...[submitBtn, cancelBtn]);
     return btnDiv;
   }
 
-  private updateUser(event: SubmitEvent) {
+  private async updateUser(event: SubmitEvent) {
+    event.preventDefault();
     const inputElements: object = Array.from(
       this.formElement.querySelectorAll("input")
-    ).reduce((obj: object, el: HTMLInputElement) => {
+    ).reduce((obj, el) => {
+      if (el.id == 'photoFile') {
+        obj[el.id] = el as HTMLInputElement;
+        return obj;
+      }
       obj[el.id] = el.value;
       return obj;
     }, {});
-    console.log(inputElements);
-    console.log(this.user);
 
-    hideForm(this.overlay);
+    await User.updateUser(
+      this.user.uid,
+      inputElements["lastName"],
+      inputElements["firstName"],
+      inputElements["photoFile"],
+      inputElements["dateOfBirth"],
+    );
   }
 }

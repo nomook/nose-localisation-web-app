@@ -1,13 +1,12 @@
-import { drawTable, hideForm } from "../../events/events.js";
+import { hideForm } from "../../events/events.js";
 import { User } from "../User.js";
-import { UserList } from "../UserList.js";
 
 
 export class UserCreationPopUp {
   private formElement: HTMLFormElement;
   overlay: HTMLDivElement;
 
-  constructor(users, overlay: HTMLDivElement) {
+  constructor(overlay: HTMLDivElement) {
     this.formElement = document.createElement("form");
     overlay.style.display = "grid";
     this.overlay = overlay;
@@ -22,16 +21,17 @@ export class UserCreationPopUp {
 
 
         <label for="dateOfBirth">Date de naissance :</label>
-        <input type="date" id="dateOfBirth" />
+        <input type="date" id="dateOfBirth" value="1990-01-01" required />
 
-        <label for="photoUrl">Photo (URL) :</label>
+        <label for="photoFile">Photo (File) :</label>
         <input
           type="file"
-          id="photoUrl"
+          id="photoFile"
           placeholder="URL de la photo"
+          required
         />
         `;
-    this.formElement.appendChild(this.getButtons(users));
+    this.formElement.appendChild(this.getButtons());
     this.formElement.style.display = "grid";
     document.body.appendChild(this.formElement);
   }
@@ -40,7 +40,7 @@ export class UserCreationPopUp {
     return this.formElement;
   }
 
-  private getButtons(users) {
+  private getButtons() {
     const btnDiv = document.createElement("div") as HTMLDivElement;
     btnDiv.className = "buttons";
     const submitBtn = document.createElement("button") as HTMLButtonElement;
@@ -52,32 +52,33 @@ export class UserCreationPopUp {
     cancelBtn.type = "button";
     cancelBtn.innerText = "Cancel";
 
-    this.formElement.addEventListener("submit", (event) => {
+    this.formElement.addEventListener("submit", async (event) => {
       event.preventDefault();
-      this.newUser(event, users);
-      drawTable(users);
+      await this.newUser(event);
     });
     cancelBtn.addEventListener("click", () => hideForm(this.overlay));
     btnDiv.append(...[submitBtn, cancelBtn]);
     return btnDiv;
   }
 
-  private newUser(event: SubmitEvent, users: UserList) {
+  private async newUser(event: SubmitEvent) {
+    event.preventDefault();
     const inputElements: object = Array.from(
       this.formElement.querySelectorAll("input")
     ).reduce((obj, el) => {
+      if (el.id == 'photoFile') {
+        obj[el.id] = el as HTMLInputElement;
+        return obj;
+      }
       obj[el.id] = el.value;
       return obj;
     }, {});
 
-    const us = new User(
+    await User.createUser(
       inputElements["lastName"],
       inputElements["firstName"],
-      inputElements["photoUrl"],
-      new Date(inputElements["dateOfBirth"])
+      inputElements["photoFile"],
+      inputElements["dateOfBirth"],
     );
-
-    users.add(us);
-    hideForm(this.overlay);
   }
 }

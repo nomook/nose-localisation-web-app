@@ -1,20 +1,24 @@
-import { UserCreationPopUp } from "../component/popup/UserCreationPopUp.js";
+import { BACKEND_URL } from "../service/utils.js";
 import { UserList } from "../component/UserList.js";
 
-export const showForm = function (this: HTMLButtonElement, users: UserList, overlay: HTMLDivElement) {
-  new UserCreationPopUp(users, overlay).getElement();
-};
-
 export const hideForm = function (overlay: HTMLDivElement) {
-  const form = document.querySelector('form');
+  const form = document.querySelector('.popup');
   if (form){
     document.body.removeChild(form);
     overlay.style.display = "none";
   }
 }
 
-export function deleteUser(cellElement: HTMLTableCellElement, users: UserList) {
-  users.remove(Number(cellElement?.parentNode?.childNodes.item(0).textContent));
+export async function deleteUser(user_id: string) {
+  console.log(`Will erase ${user_id}`);
+  await fetch(`${BACKEND_URL}/user?${new URLSearchParams([['_id', user_id]]).toString()}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => response.json());
+  location.reload();
 }
 
 export function drawTable(users: UserList) {

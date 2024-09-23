@@ -3,11 +3,9 @@
   "version": "1.0.0",
   "main": "./frontend/dist/main.js",
   "scripts": {
-    "test-backend": "jest ./backend",
-    "start-backend": "tsc --project ./backend/tsconfig.json -w  | node --watch ./backend/dist/app.js",
     "test-frontend": "jest ./frontend",
     "start-frontend": "tsc --project ./frontend/tsconfig.json -w | npx live-server --open=./frontend/public --port=8080",
-    "start": "npm run start-backend | npm run start-frontend"
+    "start": "npm run start-backend | npm run start"
   },
   "author": "nomook",
   "keywords": [

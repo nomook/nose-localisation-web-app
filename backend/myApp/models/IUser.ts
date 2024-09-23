@@ -18,7 +18,7 @@ export interface IUser {
 const PositionSchema = new Schema<IPosition>({
     x: {type: Number, required: true},
     y: {type: Number, required: true},
-})
+}, {_id: false})
 
 export const UserSchema = new Schema<IUser>({
     name: { type : String, required: true },

@@ -1,4 +1,5 @@
 export const PAGE_MAX_LENGTH = 20;
+export const BACKEND_URL = 'http://localhost:3000'
 
 export function inputElement(id: string, labelText: string, required: boolean = false, data_type: string = 'text', placeHolder: any = null) : HTMLElement[] {
     const labelElement = document.createElement('label');
