@@ -1,6 +1,6 @@
 # 👃 Nose localisation web app
 
-This app was made to learn more about building a full-stack web app. The goal is to have an app helping people to generate data to train a machine learning model to do it automaticaly.
+This app was made to learn more about building a full-stack web app. The goal is to have an app helping people to generate data to train a machine learning model to do it automatically.
 
 This is built using typescript, mongodb and expressjs.
 
