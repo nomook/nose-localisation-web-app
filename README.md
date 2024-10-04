@@ -8,6 +8,8 @@ I'm working on implementing `docker-compose` to easily deploy it on any machine.
 
 ## 💻 Install and run
 
+A mongodb must run on `localhost:27017`.
+
 First, you need to install all the dependencies of the project using:
 ```sh
 npm i
@@ -31,6 +33,12 @@ It is still in **WIP** for the moment, to finalize implement more complicated te
 ## 🧪 Unit tests
 
 Not implemented for the moment.
+
+## UI screenshots
+
+![main page](./assets/main-page.png)
+
+![nose loc](./assets/nose-loc-capture.png)
 
 
 nomook_

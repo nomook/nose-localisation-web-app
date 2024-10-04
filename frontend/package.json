@@ -5,7 +5,7 @@
   "scripts": {
     "test-frontend": "jest ./frontend",
     "start-frontend": "tsc --project ./frontend/tsconfig.json -w | npx live-server --open=./frontend/public --port=8080",
-    "start": "npm run start-backend | npm run start"
+    "start": "npx live-server --open=./public --port=8080"
   },
   "author": "nomook",
   "keywords": [

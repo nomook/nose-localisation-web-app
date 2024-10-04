@@ -55,6 +55,7 @@ export class UserCreationPopUp {
     this.formElement.addEventListener("submit", async (event) => {
       event.preventDefault();
       await this.newUser(event);
+      location.reload();
     });
     cancelBtn.addEventListener("click", () => hideForm(this.overlay));
     btnDiv.append(...[submitBtn, cancelBtn]);

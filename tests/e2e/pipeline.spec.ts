@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 
 test("init page", async ({ page }) => {
   await page.goto("http://127.0.0.1:8080/frontend/public/");
-  await expect(page).toHaveTitle("Gestion des Utilisateurs");
+  await expect(page).toHaveTitle("Users' management");
 });
 
 test("create a user", async ({ page }) => {
