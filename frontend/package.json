@@ -1,5 +1,5 @@
 {
-  "name": "ge_proj",
+  "name": "nose_loc",
   "version": "1.0.0",
   "main": "./frontend/dist/main.js",
   "scripts": {

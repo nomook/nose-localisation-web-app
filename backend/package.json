@@ -1,5 +1,5 @@
 {
-  "name": "back-ge",
+  "name": "nose_loc",
   "type": "module",
   "version": "1.0.0",
   "main": "dist/app.js",
